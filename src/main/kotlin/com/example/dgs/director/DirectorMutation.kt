@@ -11,7 +11,7 @@ class DirectorMutation(val directorService: DirectorService) {
     fun newDirector(@InputArgument("input") directorInput: DirectorInput): Director {
         println(directorInput)
         return directorService.createDirector(
-            Director(null, name = directorInput.name)
+            Director(null, name = directorInput.name, age = directorInput.age, lastName = directorInput.lastName)
         )
     }
 }

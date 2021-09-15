@@ -20,6 +20,8 @@ class DirectorService(private val directorRepository: DirectorRepository) {
                 Director(
                     id = director.id,
                     name = director.name,
+                    age = director.age,
+                    lastName = director.lastName,
                     movies = director.movies
                 )
             )

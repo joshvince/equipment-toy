@@ -9,10 +9,14 @@ extend type Mutation {
 
 input DirectorInput {
    name: String!
+   age: Int!,
+   lastName: String
 }
 
 type Director {
    id: ID!
    name: String!
+   age: Int!
+   lastName: String
    movies: [Movie]
 }
