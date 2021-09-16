@@ -1,6 +1,10 @@
 package com.example.equipment.events
 
-class EventHandler(private val event: Event) {
+import com.example.equipment.piece.PieceRepository
+import com.example.equipment.piece.PieceService
+import com.example.equipment.piece.TransportMode
+
+class EventHandler(private val event: Event, private val repository: PieceRepository) {
     init {
         when (event.eventType) {
             "CargoAdded" -> createPiece(event)
@@ -11,7 +15,7 @@ class EventHandler(private val event: Event) {
     }
 
     private fun createPiece(event: Event): Unit {
-        //TODO: implement this
+        PieceService(repository).createPiece(transportMode = TransportMode.OCEAN, cargoCount = 1)
     }
 
     private fun removePiece(event: Event): Unit {
