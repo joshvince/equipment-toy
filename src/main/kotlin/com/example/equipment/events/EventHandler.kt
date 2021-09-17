@@ -6,9 +6,8 @@ import com.example.equipment.piece.TransportMode
 class EventHandler(private val event: Event, private val service: PieceService) {
     init {
         when (event.eventType) {
-            "CargoAdded" -> createPiece(event)
-            "CargoRemoved" -> removePiece(event)
-            "CargoUpdated" -> updatePiece(event)
+            EventType.CargoAdded -> createPiece(event)
+            EventType.CargoRemoved -> removePiece(event)
             else -> throw Exception("Hi there!")
         }
     }

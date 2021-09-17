@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.5.21"
 	kotlin("plugin.spring") version "1.5.21"
 	kotlin("plugin.jpa") version "1.5.21"
+	kotlin("plugin.serialization") version "1.5.21"
 }
 
 group = "com.example"
@@ -30,11 +31,13 @@ dependencies {
 	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	testImplementation("io.mockk:mockk:1.12.0")
+	implementation("com.beust:klaxon:5.5")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0-RC")
 }
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
+		freeCompilerArgs = listOf("-Xjsr305=strict", "-Xopt-in=kotlin.RequiresOptIn")
 		jvmTarget = "11"
 	}
 }
