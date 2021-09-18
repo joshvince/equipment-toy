@@ -8,11 +8,7 @@ class EventService(private val pieceService: PieceService) {
     fun handleEvent(input: EventJson): Unit {
         val event = createEvent(input)
 
-        when (event?.eventType) {
-            EventType.CargoAdded -> pieceService.createPiece(event)
-            EventType.CargoRemoved -> pieceService.removePiece(event)
-            else -> throw Exception("The event was not a valid event")
-        }
+        if(event != null) pieceService.handleEvent(event)
     }
 
     private fun createEvent(input: EventJson): Event? {
@@ -20,6 +16,7 @@ class EventService(private val pieceService: PieceService) {
 
         return Event(
             eventType = eventType,
+            modeOfTransportString = input.modeOfTransport,
             cargoId = input.cargoId,
             cargoTypeString = input.cargoType,
             zencargoReference = input.zencargoReference,
