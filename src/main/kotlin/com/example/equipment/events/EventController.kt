@@ -1,29 +1,20 @@
 package com.example.equipment.events
 
-import com.example.equipment.piece.PieceRepository
+import com.example.equipment.piece.PieceService
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.springframework.stereotype.Controller
-import org.springframework.stereotype.Repository
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 
 @Controller
-class EventController(private val repository: PieceRepository) {
-    @GetMapping("/event/{eventName}")
+class EventController(private val service: PieceService) {
+    @OptIn(ExperimentalSerializationApi::class)
+    @PostMapping(path = ["/event"])
     @ResponseBody
-    fun handleGet(@PathVariable eventName: String): String {
-        val event = EventPublisher.generateEvent(eventName)
-        EventHandler(event, repository)
-        return returnEventName(event)
+    fun handlePost(@RequestBody body: String): String {
+        val eventJson = Json.decodeFromString<EventJson>(body)
+        EventService(service).handleEvent(eventJson)
+        return eventJson.toString()
     }
-
-    @GetMapping("/event")
-    @ResponseBody
-    fun handleGet(): String {
-        val event = EventPublisher.generateEvent()
-        EventHandler(event, repository)
-        return returnEventName(event)
-    }
-
-    private fun returnEventName(event: Event): String = "The event fired was ${event.eventType}"
 }
