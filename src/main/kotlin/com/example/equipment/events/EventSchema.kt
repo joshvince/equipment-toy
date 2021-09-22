@@ -15,7 +15,7 @@ interface EventSchema {
 }
 
 enum class EventType {
-    CargoAdded, CargoRemoved, CollectionDateUpdated, CollectionTimeUpdated;
+    CargoAdded, CargoRemoved, CollectionDateUpdated, CollectionTimeUpdated, DeliveryDateUpdated, DeliveryTimeUpdated;
 
     companion object {
         fun getEventTypeByName(name: String): EventType = valueOf(name)

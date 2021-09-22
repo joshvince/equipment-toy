@@ -1,5 +1,6 @@
 package com.example.equipment.piece
 
+import com.example.equipment.events.ModeOfTransport
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Assertions.*
 internal class PieceServiceTest {
     private val repository = mockk<PieceRepository>()
     private val service = PieceService(repository)
-    private val piece = Piece(transportMode = TransportMode.OCEAN, cargoCount = 1)
+    private val piece = Piece(modeOfTransport = ModeOfTransport.OCEAN, cargoCount = 1)
 
     @BeforeEach
     fun setUp() {
@@ -25,7 +26,7 @@ internal class PieceServiceTest {
 
     @Test
     fun `it calls the repository to save a new piece`() {
-        service.createPiece(transportMode = TransportMode.OCEAN, cargoCount = 1)
+        service.createPiece(modeOfTransport = ModeOfTransport.OCEAN, cargoCount = 1)
 
         verify(exactly = 1) { repository.save(piece) }
     }
