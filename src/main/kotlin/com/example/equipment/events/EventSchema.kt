@@ -7,6 +7,7 @@ import java.time.LocalTime
 interface EventSchema {
     val eventType: EventType
     val zencargoReference: String?
+    val modeOfTransport: ModeOfTransport?
     val cargoId: String?
     val cargoType: CargoType?
     val collectionDate: LocalDate?
@@ -14,9 +15,17 @@ interface EventSchema {
 }
 
 enum class EventType {
-    CargoAdded, CargoRemoved, CollectionDateUpdated, CollectionTimeUpdated;
+    CargoAdded, CargoRemoved, CollectionDateUpdated, CollectionTimeUpdated, DeliveryDateUpdated, DeliveryTimeUpdated;
 
     companion object {
         fun getEventTypeByName(name: String): EventType = valueOf(name)
+    }
+}
+
+enum class ModeOfTransport {
+    OCEAN, TRUCK, AIR;
+
+    companion object {
+        fun getModeOfTransportByName(name: String): ModeOfTransport = valueOf(name.uppercase())
     }
 }

@@ -1,5 +1,6 @@
 package com.example.equipment.piece
 
+import com.example.equipment.events.ModeOfTransport
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDate
 import java.time.LocalTime
@@ -15,7 +16,7 @@ data class Piece(
     var id: UUID? = null,
     @Column(name = "transport_mode")
     @Enumerated(EnumType.STRING)
-    val transportMode: TransportMode? = null,
+    val modeOfTransport: ModeOfTransport? = null,
     @Column(name = "cargo_count")
     val cargoCount: Int? = null,
     @Column
@@ -25,5 +26,3 @@ data class Piece(
     @Column
     val collectionTime: LocalTime? = null
 )
-
-enum class TransportMode { TRUCK, OCEAN, AIR }
